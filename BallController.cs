@@ -57,5 +57,13 @@ public class BallController : MonoBehaviour
         var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         rb.velocity = direction * Mathf.Max(speed, 0);
     }
+    
+        private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("GameOverTrigger"))
+        {
+            Debug.LogError("球掉下去了");
+        }
+    }
 
 }
