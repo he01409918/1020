@@ -10,6 +10,8 @@ public class BallController : MonoBehaviour
 
     public float speed;
 
+    private Vector3 lastVelocity;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,7 +19,18 @@ public class BallController : MonoBehaviour
 
     private void Update()
     {
-        if (isStart  == false)
+        OnStartBall();
+
+        SpeedController();
+    }
+
+
+    /// <summary>
+    /// 未開始前
+    /// </summary>
+    public void OnStartBall()
+    {
+        if (!isStart)
         {
             GameObject Controller = Manager.Instance.Controller;
             Vector3 offset = new Vector3(0, 0.8f, 0);
@@ -28,6 +41,21 @@ public class BallController : MonoBehaviour
                 isStart = true;
             }
         }
+    }
+
+    /// <summary>
+    /// 球速計算
+    /// </summary>
+    public void SpeedController()
+    {
+        lastVelocity = rb.velocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var speed = lastVelocity.magnitude;
+        var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
+        rb.velocity = direction * Mathf.Max(speed, 0);
     }
 
 }
