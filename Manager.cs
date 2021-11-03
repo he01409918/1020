@@ -9,9 +9,25 @@ public class Manager : MonoBehaviour
     public GameObject Ball;
 
     public GameObject Controller;
-    void Start()
+
+    public List<GameObject> Bricks = new List<GameObject>();
+
+    private void Awake()
     {
         Instance = this;
+    }
+
+    public void OnAddBricksList(GameObject obj)
+    {
+        Bricks.Add(obj);
+    }
+    public void OnRemoveBricksList(GameObject obj)
+    {
+        Bricks.Remove(obj);
+        if (Bricks.Count == 0)
+        {
+            Debug.LogError("1");
+        }
     }
 
 }
