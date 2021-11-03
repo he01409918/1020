@@ -23,10 +23,20 @@ public class Manager : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        UpdateGameTime();
+    }
+
     public void UpdateGameTime()
     {
         GameTime -= Time.deltaTime;
         TimeText.text = GameTime.ToString("0");
+        GameTime = Mathf.Clamp(GameTime, 0, GameTime);
+        if (GameTime <= 0)
+        {
+            DisplayGameOverText();
+        }
     }
 
     public void OnAddBricksList(GameObject obj)
