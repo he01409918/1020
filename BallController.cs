@@ -60,6 +60,10 @@ public class BallController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Brick>().OnGetHit();
         }
+                if (collision.gameObject.CompareTag("Brick"))
+        {
+            collision.gameObject.GetComponent<Brick>().OnGetHit();
+        }
 
     }
 
