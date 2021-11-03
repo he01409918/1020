@@ -56,14 +56,20 @@ public class BallController : MonoBehaviour
         var speed = lastVelocity.magnitude;
         var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         rb.velocity = direction * Mathf.Max(speed, 0);
+        if (collision.gameObject.CompareTag("Brick"))
+        {
+            collision.gameObject.GetComponent<Brick>().OnGetHit();
+        }
+
     }
-    
-        private void OnTriggerEnter2D(Collider2D collision)
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("GameOverTrigger"))
         {
             Debug.LogError("球掉下去了");
         }
-    }
 
+    }
 }
