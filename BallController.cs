@@ -60,19 +60,14 @@ public class BallController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Brick>().OnGetHit();
         }
-                if (collision.gameObject.CompareTag("Brick"))
-        {
-            collision.gameObject.GetComponent<Brick>().OnGetHit();
-        }
-
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("GameOverTrigger"))
         {
             Debug.LogError("球掉下去了");
+            Manager.Instance.DisplayGameOverText();
         }
 
     }
